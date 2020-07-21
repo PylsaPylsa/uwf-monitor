@@ -103,8 +103,6 @@ void checkStartup()
 		if (RegQueryValueEx(hKey, TEXT("UWF_Monitor"), NULL, NULL, NULL, &value_length) != ERROR_SUCCESS)
 		{
 			RegCloseKey(hKey);
-			if (MessageBox::Show("Would you like to add the UWF Monitor to system startup?", "UWF Monitor", MessageBoxButtons::YesNo, MessageBoxIcon::Information) == DialogResult::Yes)
-			{
 				if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\"), 0, KEY_ALL_ACCESS | KEY_WOW64_64KEY, &hKey) != ERROR_SUCCESS)
 				{
 					MessageBox::Show("Unable to add to startup items, make sure you are running as administrator.", "UWF Manager", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -124,10 +122,8 @@ void checkStartup()
 					else
 					{
 						RegCloseKey(hKey);
-						MessageBox::Show("Successfully added to startup! Please make sure this executable is renamed and copied to \"C:\\Program Files\\UWF Manager\\uwfmon.exe\"", "UWF Monitor", MessageBoxButtons::OK, MessageBoxIcon::Information);
 					}
 				}
-			}
 		}
 	}
 }
